@@ -5,8 +5,8 @@ function loadPage() {
 function downloadNews(rss) {
     showLoading();
 
-    $.post("/DownloadNews", { rss: rss })
-        .done(function( data ) {
+    jQuery.post("/DownloadNews", { rss: rss })
+        .done(function( ) {
             getAllNews();
         })
         .fail(function() {
@@ -22,7 +22,7 @@ function getAllNews() {
 
     var search_text = document.getElementById('search_text').value;
 
-    $.post("/GetAllNews", { title: search_text })
+    jQuery.post("/GetAllNews", { title: search_text })
         .done(function( data ) {
             deleteAllNews();
             for (var i = 0; i < data.length; i++) {
@@ -38,14 +38,32 @@ function getAllNews() {
 }
 
 function createNews(news) {
-    $("#news").append(
-        "<div style=\"margin: 10px; border-radius: 8px; background: #f0f0f0; border: 1px solid black; padding: 15px;\">" +
-            "<div><a href=" + news.link + ">" + news.title + "</a></div>" +
-            "<div>" + news.description + "</div>" +
-            "<div>" + dateToStr(new Date(news.date)) + "</div>" +
-        "</div>");
+    jQuery('<div/>', {
+        name: 'news_div',
+        style: 'margin: 10px; border-radius: 8px; background: #f0f0f0; border: 1px solid black; padding: 15px;'
+    }).appendTo('#news');
+
+    jQuery('<div/>', {
+        name: 'news_title'
+    }).appendTo(jQuery(jQuery("#news div[name=news_div]").last()));
+
+    jQuery('<a/>', {
+        href: news.link,
+        html: news.title,
+        target: '_blank'
+    }).appendTo(jQuery(jQuery("#news div[name=news_title]").last()));
+
+    jQuery('<div/>', {
+        name: 'news_description',
+        html: news.description
+    }).appendTo(jQuery(jQuery("#news div[name=news_div]").last()));
+
+    jQuery('<div/>', {
+        name: 'news_date',
+        html: dateToStr(new Date(news.date))
+    }).appendTo(jQuery(jQuery("#news div[name=news_div]").last()));
 }
 
 function deleteAllNews() {
-    $("#news").empty();
+    jQuery("#news").empty();
 }

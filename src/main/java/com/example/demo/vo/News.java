@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 
 @Entity
-public class FeedMessage {
+public class News {
 
     @Id
     private String guid;
