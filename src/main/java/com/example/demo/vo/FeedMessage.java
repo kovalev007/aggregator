@@ -1,5 +1,7 @@
 package com.example.demo.vo;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -8,15 +10,18 @@ import javax.persistence.Lob;
 @Entity
 public class FeedMessage {
 
-	@Id
+    @Id
     private String guid;
 
     private String title;
 
     @Lob
-    @Column( length = 100000 )
+    @Column(length = 100000)
     private String description;
+
     private String link;
+
+    private Date date;
 
     public String getTitle() {
         return title;
@@ -48,6 +53,14 @@ public class FeedMessage {
 
     public void setGuid(String guid) {
         this.guid = guid;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
 }

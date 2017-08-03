@@ -21,7 +21,7 @@ public class DownloadNews {
     }
 
     @RequestMapping("/DownloadNews")
-    public @ResponseBody Feed hello(@RequestParam(value = "rss", required = true) Rss rss) {
+    public @ResponseBody Feed hello(@RequestParam(value = "rss", required = true) Rss rss) throws Exception {
         FeedParser parser = new FeedParser(rss.getUrl());
         Feed feed = parser.readFeed();
         for (FeedMessage message : feed.getMessages()) {

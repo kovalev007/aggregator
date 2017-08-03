@@ -56,6 +56,7 @@ function createNews(news) {
         "<div style=\"margin: 10px; border-radius: 8px; background: #f0f0f0; border: 1px solid black; padding: 15px;\">" +
             "<div><a href=" + news.link + ">" + news.title + "</a></div>" +
             "<div>" + news.description + "</div>" +
+            "<div>" + dateToStr(new Date(news.date)) + "</div>" +
         "</div>");
 }
 

@@ -4,6 +4,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
@@ -16,7 +21,7 @@ import com.example.demo.vo.FeedMessage;
 
 public class FeedParser {
 
-	static final String TITLE = "title";
+    static final String TITLE = "title";
     static final String DESCRIPTION = "description";
     static final String CHANNEL = "channel";
     static final String LANGUAGE = "language";
@@ -27,10 +32,10 @@ public class FeedParser {
     static final String PUB_DATE = "pubDate";
     static final String GUID = "guid";
 
-	final URL url;
+    final URL url;
 
-	public Feed readFeed() {
-		Feed feed = null;
+    public Feed readFeed() throws ParseException {
+        Feed feed = null;
         try {
             boolean isFeedHeader = true;
             // Set header values intial to the empty string
@@ -91,6 +96,9 @@ public class FeedParser {
                         message.setGuid(guid);
                         message.setLink(link);
                         message.setTitle(title);
+                        DateFormat formatter = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.ENGLISH);
+                        Date date = formatter.parse(pubdate);
+                        message.setDate(date);
                         feed.getMessages().add(message);
                         event = eventReader.nextEvent();
                         continue;
@@ -102,9 +110,9 @@ public class FeedParser {
         }
  
         return feed;
-	}
+    }
 
-	private InputStream read() {
+    private InputStream read() {
         try {
             return url.openStream();
         } catch (IOException e) {
@@ -112,15 +120,15 @@ public class FeedParser {
         }
     }
 
-	public FeedParser(String feedUrl) {
+    public FeedParser(String feedUrl) {
         try {
             this.url = new URL(feedUrl);
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
     }
-	
-	private String getCharacterData(XMLEvent event, XMLEventReader eventReader)
+
+    private String getCharacterData(XMLEvent event, XMLEventReader eventReader)
             throws XMLStreamException {
         String result = "";
         event = eventReader.nextEvent();

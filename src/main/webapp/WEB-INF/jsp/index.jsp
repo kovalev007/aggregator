@@ -7,6 +7,7 @@
     <title>Hello</title>
     <script type="text/javascript" src="/js/index.js"></script>
     <script type="text/javascript" src="/js/loading.js"></script>
+    <script type="text/javascript" src="/js/date.js"></script>
     <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/loading.css">
     <script>
