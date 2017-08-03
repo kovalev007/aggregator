@@ -1,3 +1,7 @@
+function loadPage() {
+    getAllNews();
+}
+
 function downloadNews(rss) {
     showLoading();
 

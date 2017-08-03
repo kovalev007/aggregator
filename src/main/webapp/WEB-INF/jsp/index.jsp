@@ -10,11 +10,6 @@
     <script type="text/javascript" src="/js/date.js"></script>
     <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/loading.css">
-    <script>
-        function loadPage() {
-            hideLoading();
-        }
-    </script>
 </head>
 <body style="margin: 0px;" onload="loadPage();">
     <div id="head" style="z-index: 100; position: fixed; right: 0px; left: 0px; background: #383838; padding: 15px;">
@@ -30,12 +25,7 @@
     </div>
 
     <div id="news" style="z-index: 0; position: absolute; top: 100px;">
-        <c:forEach items="${messages}" var="message">
-            <div style="margin: 10px; border-radius: 8px; background: #f0f0f0; border: 1px solid black; padding: 15px;">
-                <div><a href="${message.link}">${message.title}</a></div>
-                <div>${message.description}</div>
-            </div>
-        </c:forEach>
+        
     </div>
 
     <div id="loading" style="z-index: 200;">
