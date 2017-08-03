@@ -20,7 +20,9 @@ function downloadNews(rss) {
 function getAllNews() {
     showLoading();
 
-    $.post("/GetAllNews")
+    var search_text = document.getElementById('search_text').value;
+
+    $.post("/GetAllNews", { title: search_text })
         .done(function( data ) {
             deleteAllNews();
             for (var i = 0; i < data.length; i++) {
@@ -29,26 +31,6 @@ function getAllNews() {
         })
         .fail(function() {
             alert("Error getting news");
-        })
-        .always(function() {
-            hideLoading();
-        });
-}
-
-function searchNews() {
-    showLoading();
-
-    var search_text = document.getElementById('search_text').value;
-
-    $.post("/SearchNews", { title: search_text })
-        .done(function( data ) {
-            deleteAllNews();
-            for (var i = 0; i < data.length; i++) {
-                createNews(data[i]);
-            }
-        })
-        .fail(function() {
-            alert("Error searching news");
         })
         .always(function() {
             hideLoading();

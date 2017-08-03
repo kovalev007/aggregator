@@ -20,7 +20,7 @@
         </c:forEach>
 
         <div style="text-align: center;">
-            <span style="color: #fff;">Search news by Title</span> <input id="search_text" type="text"> <input type="button" value="Search" onclick="searchNews();">
+            <span style="color: #fff;">Search news by Title</span> <input id="search_text" type="text"> <input type="button" value="Search" onclick="getAllNews();">
         </div>
     </div>
 
